@@ -9,7 +9,7 @@ import sys
 
 def print_pause(message_to_print):
     print(message_to_print)
-    time.sleep(2)
+    time.sleep(1)
 
 
 action = ['rock', 'paper', 'scissors']
@@ -99,7 +99,9 @@ class Game():
             print('The score is: ' + str(self.human.score) + ' x ' +
                   str(self.cycle.score) + '\n')
         if self.human.score > self.cycle.score:
-            print("Great job, ", human_player, "you win!\n")
+            print("Great job,", human_player, "you win!\n")
+            print("Continue to play?")
+            play_again()
         elif self.human.score > self.cycle.score:
             print('I win!')
             print('The Grand Total: ' + str(self.human.score) + ' to ' +
