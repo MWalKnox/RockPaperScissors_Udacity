@@ -2,13 +2,15 @@ import time
 import random
 import sys
 
-# Two sections of this code is very similar to another 
+# Two sections of this code is very similar to another
 # github repository because this was my "guide" of sorts
 # I fully understand what the two sections of similar code do
 
+
 def print_pause(message_to_print):
     print(message_to_print)
-    time.sleep(0)
+    time.sleep(2)
+
 
 action = ['rock', 'paper', 'scissors']
 
@@ -20,7 +22,8 @@ print_pause("Scissors cut paper. Scissors wins.")
 print_pause("The best two out of three wins. \n")
 
 human_player = input("Hello Human. What is your name? \n")
-print("\nPrepare your strategy," ,human_player, "! \n")
+print("\nPrepare your strategy, ", human_player, "! \n")
+
 
 # Parent Class - Base for all players
 class Player():
@@ -33,11 +36,13 @@ class Player():
     def learn(self, player_last_action):
         pass
 
+
 # Random Player - Based on Parent Class
 class RandomPlayer(Player):
     def play(self):
         index = random.choice(0, 2)
         return action[index]
+
 
 # Reflect Player - Based on Parent Class
 class ReflectPlayer(Player):
@@ -52,6 +57,7 @@ class ReflectPlayer(Player):
 
     def learn(self, player_last_action):
         self.player_last_action = player_last_action
+
 
 # Cycle Player - Based on Parent Class
 class CyclePlayer(Player):
@@ -71,7 +77,8 @@ class CyclePlayer(Player):
         self.last_move = move
         return move
 
-# Human Player - Based on Parent Class		
+
+# Human Player - Based on Parent Class
 class HumanPlayer(Player):
     def play(self):
         human_move = input('Your turn; choose ' + ', '.join(action) + '\n')
@@ -86,14 +93,13 @@ class Game():
         self.human = HumanPlayer()
         self.cycle = CyclePlayer()
 
-
     def play_game(self):
         for match in range(3):
             self.play_match()
             print('The score is: ' + str(self.human.score) + ' x ' +
                   str(self.cycle.score) + '\n')
         if self.human.score > self.cycle.score:
-            print("Great job,",human_player,"you win!\n")
+            print("Great job, ", human_player, "you win!\n")
         elif self.human.score > self.cycle.score:
             print('I win!')
             print('The Grand Total: ' + str(self.human.score) + ' to ' +
@@ -101,7 +107,6 @@ class Game():
         else:
             print('Continue to play?')
             play_again()
-
 
     def play_match(self):
         player1_move = self.human.play()
@@ -111,11 +116,11 @@ class Game():
         self.human.learn(player2_move)
         self.cycle.learn(player1_move)
 
-        print(human_player,'chose "' + player1_move + '" and I chose "'
+        print(human_player, 'chose "' + player1_move + '" and I chose "'
               + player2_move + '"')
         if move_made == 1:
             self.human.score += 1
-            print(human_player,"\'s Match! \n")
+            print(human_player, "\'s Match! \n")
         elif move_made == 2:
             self.cycle.score += 1
             print('My Match!\n')
@@ -143,6 +148,7 @@ class Game():
             return True
         return False
 
+
 # Offer an out
 def play_again():
     print("Answer yes or no:")
@@ -154,11 +160,12 @@ def play_again():
         game.play_game()
     if again.lower() == 'no':
         print("Okay, thank you for playing rock, paper, scissors with me!")
-      # sys.exit()
+    # sys.exit()
     else:
         KeyboardInterrupt
         print("Swift Exit! Hope you had fun!")
 #        play_again()
+
 
 game = Game()
 game.play_game()
